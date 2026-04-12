@@ -1,0 +1,13 @@
+{
+  "name": "nexusflow-core",
+  "version": "1.0.0",
+  "description": "Core domain logic and use cases for NexusFlow",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
