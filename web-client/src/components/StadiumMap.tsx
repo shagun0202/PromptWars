@@ -1,4 +1,3 @@
-import { Map } from 'lucide-react';
 
 export default function StadiumMap() {
     return (
