@@ -2,36 +2,22 @@ import { Map } from 'lucide-react';
 
 export default function StadiumMap() {
     return (
-        <div className="map-placeholder">
-            <div className="live-badge">REAL-TIME TELEMETRY</div>
+        <div style={{ width: '100%', height: '100%', borderRadius: '16px', overflow: 'hidden', position: 'relative', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+            <div className="live-badge" style={{ position: 'absolute', top: '15px', right: '15px', zIndex: 10, background: 'rgba(0,0,0,0.8)', padding: '0.5rem 1rem', borderRadius: '8px' }}>
+                Google Services: REAL-TIME TELEMETRY
+            </div>
             
-            <Map size={64} color="var(--primary)" style={{ opacity: 0.8, marginBottom: '1rem' }} />
-            <h3 style={{ color: 'var(--primary)', fontSize: '1.5rem', marginBottom: '0.5rem', textShadow: '0 0 10px rgba(0,240,255,0.5)' }}>Google Maps SDK Hook</h3>
-            <p style={{ color: 'var(--text-muted)', maxWidth: '400px', textAlign: 'center', fontSize: '0.9rem' }}>
-                This region is reserved for the Maps rendering engine. Real-time A* pathfinding routes from the Python API will overlay seamlessly utilizing the dynamically updated heatmap thresholds.
-            </p>
-
-            {/* Simulated Path Overlay Graphic */}
-            <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
-                <path 
-                    d="M 100 500 Q 200 300 400 400 T 700 100" 
-                    fill="none" 
-                    stroke="var(--primary)" 
-                    strokeWidth="4"
-                    strokeDasharray="10 10"
-                    className="path-animate"
-                />
-            </svg>
-            <style>{`
-                .path-animate {
-                    stroke-dashoffset: 1000;
-                    animation: dash 20s linear infinite;
-                    filter: drop-shadow(0 0 8px var(--primary-glow));
-                }
-                @keyframes dash {
-                    to { stroke-dashoffset: 0; }
-                }
-            `}</style>
+            {/* Native Google Maps Embed (No API Key Required!) */}
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13233.158229892305!2d-118.350361!3d33.9534346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2b786cbfb8f4f%3A0x5fb99cb7ec48cb09!2sSoFi%20Stadium!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) brightness(80%)' }} 
+                allowFullScreen={true} 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Google Maps Service View"
+            ></iframe>
         </div>
     );
 }

@@ -1,0 +1,24 @@
+# Multi-stage build for the Monorepo Node Gateway
+FROM node:20-alpine
+WORKDIR /app
+
+# Step 1: Copy and build the core logic
+COPY nexusflow-core/package.json nexusflow-core/tsconfig.json ./nexusflow-core/
+COPY nexusflow-core/src ./nexusflow-core/src/
+WORKDIR /app/nexusflow-core
+RUN npm install
+RUN npm run build
+
+# Step 2: Copy and build the API Gateway (it relies on the compiled core logic)
+WORKDIR /app
+COPY api-gateway/package.json api-gateway/tsconfig.json ./api-gateway/
+COPY api-gateway/src ./api-gateway/src/
+WORKDIR /app/api-gateway
+RUN npm install
+RUN npm run build
+
+# Set the port explicitly to 8080 (Cloud Run's default required port)
+ENV PORT=8080
+EXPOSE 8080
+
+CMD ["npm", "start"]

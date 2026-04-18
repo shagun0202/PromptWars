@@ -24,7 +24,7 @@ export default function VirtualQueueCard({ targetId, title }: Props) {
     const isJoined = waitData !== null;
 
     return (
-        <article className="glass-panel" style={{ padding: '1.5rem' }}>
+        <article className="glass-panel" data-target={targetId} style={{ padding: '1.5rem' }}>
             <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>{title}</h3>
             
             {!isJoined ? (

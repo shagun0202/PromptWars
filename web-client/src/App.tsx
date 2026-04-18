@@ -83,7 +83,7 @@ function App() {
 
             {!isOffline ? (
                 <>
-                    <div style={{ animationDelay: '0.2s' }} className="animate-in glass-panel" style={{ padding: '1.5rem' }}>
+                    <div className="animate-in glass-panel" style={{ animationDelay: '0.2s', padding: '1.5rem' }}>
                         <LiveNotificationFeed />
                     </div>
                     

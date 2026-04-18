@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ShieldAlert, Cross, Baby, MapPin, X, CheckCircle } from 'lucide-react';
+import { ShieldAlert, MapPin, X, CheckCircle } from 'lucide-react';
 
 interface Props {
     isOpen: boolean;
