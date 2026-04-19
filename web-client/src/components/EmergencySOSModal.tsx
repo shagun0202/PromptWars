@@ -23,7 +23,7 @@ export default function EmergencySOSModal({ isOpen, onClose }: EmergencySOSModal
 
     if (!isOpen) return null;
 
-    const dispatchHelp = (type: EmergencyType): void => {
+    const dispatchHelp = (_type: EmergencyType): void => {
         setStatus('sending');
         // Simulate dispatching SOS event to API Gateway → Firestore analytics
         setTimeout(() => {
