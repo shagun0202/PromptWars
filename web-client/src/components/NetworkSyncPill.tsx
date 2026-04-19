@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Network Sync Pill — visual indicator and toggle for network status.
+ * Allows developers to simulate cellular dead zones for testing offline mesh mode.
+ */
+
 import { Wifi, WifiOff } from 'lucide-react';
 
 interface Props {

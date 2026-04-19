@@ -1,3 +1,9 @@
+/**
+ * @fileoverview AI Arrival Forecast Card — surge prediction and Fast-Pass enrollment.
+ * Simulates Vertex AI inference to predict security queue capacity and incentivizes
+ * fans to delay entry by offering priority gate access via digital tickets.
+ */
+
 import { useState } from 'react';
 import { Sparkles, Ticket, CheckCircle2 } from 'lucide-react';
 

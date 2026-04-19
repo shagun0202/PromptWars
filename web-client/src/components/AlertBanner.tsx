@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Alert Banner — dynamic status notifications displayed at the top of the viewport.
+ * Uses ARIA role="alert" and aria-live="polite" for screen reader accessibility.
+ */
+
 import { AlertTriangle } from 'lucide-react';
 
 interface Props {

@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Mesh Chat Module — peer-to-peer communication fallback.
+ * When the network goes offline, this component simulates BLE Mesh Relay
+ * messaging, allowing fans to coordinate locally without cellular connectivity.
+ */
+
 import { useState } from 'react';
 import { Send, Users, Bluetooth, AlertTriangle } from 'lucide-react';
 
@@ -92,7 +98,7 @@ export default function MeshChatModule({ isOffline }: Props) {
                     type="text" 
                     value={msgText}
                     onChange={(e) => setMsgText(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+                    onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
                     placeholder={isOffline ? "Send via local mesh..." : "Type a message..."} 
                     style={{ flex: 1, background: 'rgba(0,0,0,0.3)', border: '1px solid var(--surface-border)', color: 'white', padding: '0.5rem 1rem', borderRadius: '8px' }}
                 />

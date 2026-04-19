@@ -1,5 +1,16 @@
+/**
+ * @fileoverview Main application layout — NexusFlow Venue Dashboard.
+ *
+ * Orchestrates the glassmorphic dashboard with:
+ *   - Google Maps Embed (StadiumMap)
+ *   - Virtual queue enrollment cards
+ *   - Emergency SOS dispatch modal
+ *   - Offline mesh networking mode
+ *   - Real-time coordination feed
+ */
+
 import { useState } from 'react';
-import { Activity, BadgeInfo, Cross, AlertTriangle, ShieldAlert } from 'lucide-react';
+import { Activity, BadgeInfo, AlertTriangle, ShieldAlert, Plus } from 'lucide-react';
 import StadiumMap from './components/StadiumMap';
 import VirtualQueueCard from './components/VirtualQueueCard';
 import AlertBanner from './components/AlertBanner';
@@ -12,8 +23,6 @@ import MeshChatModule from './components/MeshChatModule';
 function App() {
   const [accessibleMode, setAccessibleMode] = useState(false);
   const [sosOpen, setSosOpen] = useState(false);
-  
-  // The global network state toggle logic
   const [isOffline, setIsOffline] = useState(false);
 
   return (
@@ -39,7 +48,7 @@ function App() {
             onClick={() => setSosOpen(true)}
             style={{ padding: '0.4rem 1rem', fontSize: '0.85rem', borderColor: 'var(--danger)', color: 'var(--danger)', display: 'flex', gap: '0.5rem', alignItems: 'center' }}
           >
-             <Cross size={16} /> SOS / Safety
+             <Plus size={16} /> SOS / Safety
           </button>
         </nav>
       </header>
@@ -76,7 +85,6 @@ function App() {
         <aside style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             <h2 className="sr-only">Platform Feed</h2>
             
-            {/* The Mesh Chat gracefully expands or remains a tight widget based on network state */}
             <div style={{ animationDelay: '0.1s' }} className="animate-in">
                 <MeshChatModule isOffline={isOffline} />
             </div>
@@ -110,7 +118,7 @@ function App() {
         </aside>
       </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Virtual Queue Card — interactive queue enrollment component.
+ * Fans join a virtual line to avoid physical crowding. The card transitions
+ * between idle, loading, and confirmed states with smooth animations.
+ */
+
 import { useState } from 'react';
 import { Clock, Users, CheckCircle2 } from 'lucide-react';
 

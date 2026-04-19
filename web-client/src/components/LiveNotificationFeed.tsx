@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Live Notification Feed — real-time PA broadcast simulation.
+ * Displays critical gate closures, performance delays, and exit reroutes
+ * with severity-based color coding and ARIA live region for accessibility.
+ */
+
 import { useState, useEffect } from 'react';
 import { BellRing, ShieldAlert, Info } from 'lucide-react';
 

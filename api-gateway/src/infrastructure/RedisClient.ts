@@ -1,35 +1,44 @@
+/**
+ * @fileoverview In-memory Redis adapter implementing the RedisAdapter port.
+ *
+ * In production, this would connect to a Cloud Memorystore (Redis) instance
+ * via the REDIS_URL environment variable injected from Google Secret Manager.
+ * Locally, it simulates sorted-set operations with native Map structures.
+ */
+
 import { RedisAdapter } from 'nexusflow-core/src/interfaces/Adapters';
 
+interface SortedSetEntry {
+    score: number;
+    member: string;
+}
+
+/**
+ * Simulates a Redis sorted-set cache using native JavaScript Maps.
+ * Provides O(n log n) ranked insertion for virtual queue positioning.
+ */
 export class InMemoryRedisClient implements RedisAdapter {
-    private store: Map<string, string> = new Map();
-    private zStore: Map<string, Array<{score: number, member: string}>> = new Map();
-    public isConnected: boolean = false;
+    private readonly store: Map<string, string> = new Map();
+    private readonly sortedSets: Map<string, SortedSetEntry[]> = new Map();
 
-    constructor() {
-        // Efficiency & Security (Env Variables explicit check for evaluator)
-        const redisUrl = process.env.REDIS_URL;
-        if (redisUrl) {
-            console.log(`[Redis] Attaching to clustered remote instance at ${redisUrl}...`);
-            this.isConnected = true; 
-        } else {
-            console.warn('[Redis] No REDIS_URL found. Falling back to structured in-memory caches.');
-            this.isConnected = true;
-        }
-    }
-
+    /**
+     * Adds a member to the sorted set at `key` with the given `score`.
+     * @returns The 0-based rank (position) of the member after insertion.
+     */
     async zadd(key: string, score: number, member: string): Promise<number> {
-        if (!this.zStore.has(key)) this.zStore.set(key, []);
-        
-        const set = this.zStore.get(key)!;
-        set.push({ score, member });
-        // O(n log n) simulated indexed ranking cache
-        set.sort((a, b) => a.score - b.score);
-        
-        return set.findIndex(item => item.member === member);
+        if (!this.sortedSets.has(key)) {
+            this.sortedSets.set(key, []);
+        }
+
+        const entries = this.sortedSets.get(key)!;
+        entries.push({ score, member });
+        entries.sort((a, b) => a.score - b.score);
+
+        return entries.findIndex((entry) => entry.member === member);
     }
 
     async get(key: string): Promise<string | null> {
-        return this.store.get(key) || null;
+        return this.store.get(key) ?? null;
     }
 
     async set(key: string, value: string): Promise<void> {
